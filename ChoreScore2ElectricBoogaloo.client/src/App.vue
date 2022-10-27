@@ -5,21 +5,34 @@
   <main class="position-relative">
     <router-view />
     <div class="position-absolute add-button">
-      <button data-bs-toggle="modal" data-bs-target="#choreModal" class="btn btn-primary rounded-circle p-2 d-flex justify-content-center align-items-center"><i class="mdi mdi-plus-thick"></i></button>
+      <button data-bs-toggle="modal" data-bs-target="#addChoreModal" class="btn btn-primary rounded-circle p-2 d-flex justify-content-center align-items-center"><i class="mdi mdi-plus-thick"></i></button>
     </div>
   </main>
    <footer class="bg-dark text-light">
     Made with 💖 by CodeWorks
   </footer>
-  <div class="modal fade" id="choreModal" tabindex="-1" aria-labelledby="choreModalLabel" aria-hidden="true">
+  <div class="modal fade" id="addChoreModal" tabindex="-1" aria-labelledby="addChoreModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="choreModalLabel">Modal title</h1>
+          <h1 class="modal-title fs-5" id="addChoreModalLabel">Add Chore</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <ChoreForm />
+          <ChoreFormAdd />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="editChoreModal" tabindex="-1" aria-labelledby="editChoreModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="editChoreModalLabel">Edit Chore</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <ChoreFormEdit />
         </div>
       </div>
     </div>
@@ -30,7 +43,8 @@
 <script>
 import { computed } from 'vue'
 import { AppState } from './AppState'
-import ChoreForm from './components/ChoreForm.vue'
+import ChoreFormAdd from './components/ChoreFormAdd.vue'
+import ChoreFormEdit from './components/ChoreFormEdit.vue'
 import Navbar from './components/Navbar.vue'
 
 export default {
@@ -39,7 +53,7 @@ export default {
       appState: computed(() => AppState)
     }
   },
-  components: { Navbar, ChoreForm }
+  components: { Navbar, ChoreFormAdd, ChoreFormEdit }
 }
 </script>
 <style lang="scss">
