@@ -1,22 +1,34 @@
 <template>
-  <div class="home flex-grow-1 d-flex flex-column align-items-center justify-content-center">
-    <div class="home-card p-5 bg-white rounded elevation-3">
-      <img
-        src="https://bcw.blob.core.windows.net/public/img/8600856373152463"
-        alt="CodeWorks Logo"
-        class="rounded-circle"
-      >
-      <h1 class="my-5 bg-dark text-white p-3 rounded text-center">
-        Vue 3 Starter
-      </h1>
+  <section class="container-fluid">
+    <div v-if="chores" class="row p-3 gap-3 justify-content-center">
+      <ChoreCard v-for="c in chores" :chore="c" />
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
+import { onMounted } from 'vue';
+import Pop from '../utils/Pop.js';
+import { choresService } from '../services/ChoresService.js'
+import { computed } from '@vue/reactivity';
+import { AppState } from '../AppState.js';
+import ChoreCard from '../components/ChoreCard.vue';
+
 export default {
   setup() {
-    return {}
+    async function getChores() {
+      try {
+        await choresService.getChores()
+      } catch (error) {
+        Pop.error(error)
+      }
+    }
+    onMounted(()=>{
+      getChores();
+    })
+    return {
+      chores: computed(()=> AppState.chores)
+    }
   }
 }
 </script>
